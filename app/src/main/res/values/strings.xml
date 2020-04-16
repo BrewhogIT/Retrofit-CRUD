@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Retrofit-CRUD</string>
+    <string name="add">add book</string>
+    <string name="show_books">show books</string>
+</resources>
