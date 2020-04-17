@@ -10,6 +10,11 @@ import com.brewhog.android.retrofit_crud.databinding.BookItemBinding
 import com.brewhog.android.retrofit_crud.model.Book
 
 class BookAdapter(var bookList : List<Book>) : RecyclerView.Adapter<BookHolder>() {
+    var callback : AdapterCallback? = null
+
+    interface AdapterCallback{
+        fun callActivityFromHolder(holder: BookHolder, id : Int)
+    }
 
     fun updateBookList(newBookList: List<Book>){
         val diffUtilCallback = DiffUtilCallback(this.bookList,newBookList)
@@ -30,5 +35,6 @@ class BookAdapter(var bookList : List<Book>) : RecyclerView.Adapter<BookHolder>(
 
     override fun onBindViewHolder(holder: BookHolder, position: Int) {
         holder.bookItemBinding.book = bookList[position]
+        callback?.callActivityFromHolder(holder, bookList[position].id)
     }
 }

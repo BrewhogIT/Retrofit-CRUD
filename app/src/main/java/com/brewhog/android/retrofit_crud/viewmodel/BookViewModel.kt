@@ -120,7 +120,6 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     fun addOrUpdateBook(){
         val targetBook = book.get()
         val targetId = targetBook?.id ?: 0
-        Toast.makeText(context,"target id = $targetId , book is null - ${targetBook==null}",Toast.LENGTH_LONG).show()
 
         if (targetId != 0){
             updateBook(targetId,targetBook!!)
