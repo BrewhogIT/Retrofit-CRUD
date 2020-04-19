@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.brewhog.android.retrofit_crud.api.RetrofitClient
 import com.brewhog.android.retrofit_crud.model.Book
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -88,14 +89,14 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun deleteBook(id : Int){
-        retrofitInterface.deleteBook(id).enqueue(object : Callback<Book>{
-            override fun onFailure(call: Call<Book>, t: Throwable) {
+        retrofitInterface.deleteBook(id).enqueue(object : Callback<ResponseBody>{
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 Toast.makeText(context,"Book wasn't delete!",Toast.LENGTH_LONG).show()
             }
 
-            override fun onResponse(call: Call<Book>, response: Response<Book>) {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful){
-                    Toast.makeText(context,"Book was deleted successful!",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,response.body()?.string(),Toast.LENGTH_LONG).show()
                 }else{
                     Toast.makeText(context,"Unsuccessful!",Toast.LENGTH_LONG).show()
                 }
